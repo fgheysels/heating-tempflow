@@ -32,11 +32,11 @@ for sensor in sensorids:
 
     print "reading " + sensor
 
-    tfile = open(sensor + "/w1_slave")
+    temp_file = open(sensor + "/w1_slave")
 
-    info = tfile.read()
+    info = temp_file.read()
 
-    tfile.close()
+    temp_file.close()
 
     templine = info.split("\n")[1]
 
