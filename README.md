@@ -33,3 +33,43 @@ A 4.7k ohm resistor is necessary between the data and the VCC wire:
 See the wiring scheme below:
 
 ![Screenshot](doc/wiring_schema.png "DS18B2 wiring schema for Raspberry Pi 3")
+
+# InfluxDB
+InfluxDB is a time-series database that is a perfect fit for this project: I want to measure temperatures at a specified interval
+and store those temperatures in a database.
+A relational database could be used to achieve this, but a timeseries database is designed specifically for this kind of data.
+Key concepts of InfluxDB are explained [here](https://docs.influxdata.com/influxdb/v1.3/concepts/key_concepts/)
+
+The InfluxDB database for this project contains one series whose schema looks like this:
+
+
+Communication with InfluxDB is done via a REST API.  I find it easy to use Postman to try out the InfluxDB API.
+
+Create the database:
+
+POST http://localhost:8086/query?q=CREATE DATABASE heatflow
+
+Get list of available databases
+
+GET http://localhost:8086/query?q=SHOW DATABASES
+
+InfluxDB is a schemaless database which means you do not have to create the schema of the series up front.  Measurements, tags and fields 
+can be created any time.
+
+The data that I want to keep track of in the heatflow database is quite simple:
+I want to know what temperature was measured by all DS18B2 sensors at a specific point in time.
+
+Writing the data to the InfluxDB database is fairly simple:
+
+POST http://localhost:8086/write?db=heatflow
+
+The body of the above POST command contains the data that must be stored:
+
+	'sensordata,sensorid=abcd value=23.5'
+
+The above Line Protocol states that data will be written in the measurement (series) 'sensordata'.  The tag key 'sensorid' has the value abc and 
+the field key 'value' is assigned the field value 23.5
+
+InfluxDB can be found [here](https://www.influxdata.com/).
+
+Information on how to write data to InfluxDB using the REST API can be found [here](https://docs.influxdata.com/influxdb/v1.3/guides/writing_data/)
