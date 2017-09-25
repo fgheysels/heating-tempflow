@@ -70,6 +70,10 @@ The body of the above POST command contains the data that must be stored:
 The above Line Protocol states that data will be written in the measurement (series) 'sensordata'.  The tag key 'sensorid' has the value abc and 
 the field key 'value' is assigned the field value 23.5
 
+Reading data from the heatflow database:
+
+GET http://localhost:8086/query?pretty=true&db=heatflow&q=select * from sensordata
+
 InfluxDB can be found [here](https://www.influxdata.com/).
 
 Information on how to write data to InfluxDB using the REST API can be found [here](https://docs.influxdata.com/influxdb/v1.3/guides/writing_data/)
