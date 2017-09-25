@@ -7,10 +7,12 @@ def postSensorData( influxDbAddress, database, data ):
 
     r = requests.post(url, data)    
 
-    if r.status_code != 200:
+    if (r.status_code > 200 and r.status_code < 300):
+        print "sensordata posted successfully"
+    else:
         print "statuscode: " + str(r.status_code)
         print "body: " + r.text
-
+        
     return;
 
 def applyCorrection( sensorId, temp, factors ):
@@ -55,6 +57,6 @@ for sensor in sensorids:
 
 
 if query != "":
-    postSensorData("http://localhost:8086", "heating_flow", query)
+    postSensorData("http://localhost:8086", "heatflow", query)
 
 
