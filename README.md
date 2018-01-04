@@ -77,3 +77,11 @@ GET http://localhost:8086/query?pretty=true&db=heatflow&q=select * from sensorda
 InfluxDB can be found [here](https://www.influxdata.com/).
 
 Information on how to write data to InfluxDB using the REST API can be found [here](https://docs.influxdata.com/influxdb/v1.3/guides/writing_data/)
+
+# Visualization with Grafana
+
+[Grafana](https://grafana.com/) is a tool that lets you easily create dashboards for visualizing data.
+It has out-of-the-box support for InfluxDB so it is quite easy to set up in this case.
+![Graph](https://tweakers.net/ext/f/TllUGE4ISFLXIaiWsRglcwyL/full.jpg)
+
+
